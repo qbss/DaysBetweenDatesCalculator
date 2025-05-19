@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Date Difference Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+        .container {
+            display: inline-block;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        input[type="date"] {
+            margin: 10px 0;
+            padding: 5px;
+            font-size: 16px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .result {
+            margin-top: 20px;
+            font-size: 18px;
+            color: green;
+        }
+        .error {
+            margin-top: 20px;
+            font-size: 18px;
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Date Difference Calculator</h1>
+        <label for="start-date">Select Start Date:</label><br>
+        <input type="date" id="start-date"><br>
+        <label for="end-date">Select End Date:</label><br>
+        <input type="date" id="end-date"><br>
+        <button onclick="calculateDateDifference()">Calculate</button>
+        <div id="output" class="result"></div>
+    </div>
+
+    <script>
+        function calculateDateDifference() {
+            const startDateInput = document.getElementById("start-date").value;
+            const endDateInput = document.getElementById("end-date").value;
+            const outputDiv = document.getElementById("output");
+
+            if (!startDateInput || !endDateInput) {
+                outputDiv.innerHTML = "<span class='error'>Please select both dates.</span>";
+                return;
+            }
+
+            const startDate = new Date(startDateInput);
+            const endDate = new Date(endDateInput);
+
+            if (startDate > endDate) {
+                outputDiv.innerHTML = "<span class='error'>Start date must be before end date.</span>";
+                return;
+            }
+
+            const timeDifference = endDate - startDate;
+            const daysDifference = timeDifference / (1000 * 60 * 60 * 24);
+
+            outputDiv.innerHTML = `<span>The number of days between the selected dates is ${daysDifference} days.</span>`;
+        }
+    </script>
+</body>
+</html>
